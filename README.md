@@ -30,23 +30,4 @@ DB에 저장 하여 리스트를 출력 , 아이탬 리스트에 페이징 처�
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/106335468/193578052-15739459-8443-469f-ab84-9c4ab7164974.png">
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/106335468/193578247-37bcd67b-40a5-4a62-af8f-eeb86f628837.png">
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/106335468/193581152-25bdebe4-a48c-43e4-9985-50198ead4593.png">
-
 <br>
-<br>
-<br>
-👀<strong>config.xml</strong> <br>
-<br><br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193511438-c5e4e21e-72d0-448f-8dc6-add8c6d401d6.png">
-<br>
-<br>
-<br>
-👀<strong>vo,dao,service,controller</strong><br><br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193511589-2d07fbea-9e91-4734-bee9-43242a0f5798.png">
-<br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193511678-b0e0b0ca-a586-4301-b898-2e6b1fae5608.png">
-<br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193511750-9e18e74c-af1f-403f-bdda-0ae95db7c762.png">
-<br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193512125-583aa1d1-5cc7-4b8d-8252-600f005c2959.png">
-<br>
-<img width="425" alt="image" src="https://user-images.githubusercontent.com/106335468/193512226-e79171ec-07fb-46a9-823d-4b10d958175a.png">

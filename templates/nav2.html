@@ -1,0 +1,65 @@
+<style>
+    .categorynav{
+        height : 80px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/image/logo1.png" alt="" width="100%" height="80" class="d-inline-block align-text-top">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+                {% if 'user_name' in request.session %}
+                    {% if request.session.user_id == 'admin' %}
+                <button class="btn btn-light me-2" disabled>{{request.session.user_name}} 님</button>
+                <li class="nav-item"><a href="/member/memberList" class="nav-link active">MemberList</a></li>
+                          <li class="nav-item">
+                        </li>
+                <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/memberChart'">MemberChart</button></li>
+            <!-- adminOrdersList test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/adminOrdersList">adminOrdersList</a>
+                </li>
+            <!-- adminOrdersList test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/cancel/cancelList">CancelList</a>
+                </li>
+            <!-- cancelChart test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/cancel/cancelChart">CancelChart</a>
+                </li>
+
+                     <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/logout'">Logout</button></li>
+                    {% else %}
+                     <button class="btn btn-light me-2" disabled>{{request.session.user_name}} 님</button>
+                <li class="nav-item"><a href="/member/myPageMain" class="nav-link active">My Page</a></li>
+                <!-- 일반회원 주문 - ordersForm test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/ordersForm">ordersForm</a>
+                </li>
+                 <li class="nav-item"><a href="/orders/orderslist" class="nav-link active">ordersList</a></li>
+                <li class="nav-item"><a href="/basket/blist" class="nav-link active">basketList</a></li>
+                          <li class="nav-item">
+                        </li>
+                     <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/logout'">Logout</button></li>
+                    {% endif %}
+                {% else %}
+                     <li class="nav-item"><a href="/member/joinForm" class="nav-link active">Join Us</a></li>
+                     <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"
+                                 onclick="location='/member/loginForm'">Login</button></li>
+                 {% endif%}
+            </ul>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,31 @@
+{% extends "body.html" %}
+<!-- content 입력 -->
+{% block content %}
+<div id="content" class="container mt-5">
+<h2 class="text-center">Cancel Reason Chart</h2>
+<div class="row" style="text-align:center ">
+    <div id="chart_pie"></div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+<!-- javascript Array -->
+    var objTest = [];
+    {% for e, i in result %}
+        objTest.push(["{{e}}",{{i}}])
+    {% endfor %}
+
+<!-- 파이 차트 js -->
+    var chart = c3.generate({
+        bindto: '#chart_pie',
+        data: {
+            columns: objTest,
+            type : 'pie',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+            onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+            onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+        }
+    });
+
+</script>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends "body.html" %}
+{% block content %}
+<div class="container">
+    <form method="post" action="regist" enctype="multipart/form-data">
+        <div class="m-5 text-center">
+            <h3> 상품 등록 페이지</h3>
+        </div>
+        <div class="mb-3 row">
+            <div class="col">
+                <label for="i_name" class="form-label">상품 브랜드명</label>
+                <input type="text" class="form-control" id="i_name" name="i_name" >
+            </div>
+            <div class="col">
+                <label for="i_price" class="form-label">가격</label>
+                <input type="text" class="form-control" id="i_price" name="i_price">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="i_comm" class="form-label">상품 이름 및 설명</label>
+            <textarea class="form-control" name="i_comm" id="i_comm" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"> 카테고리</label>
+            <div class="row" style="float :none; margin: 100 auto;">
+                <div class="col" style="float:none; margin 0 auto;">
+                    <select class="form-select" name="i_category1" id="i_category1">
+                        <option selected>성별 카테고리</option>
+                        <option value="남자">남자</option>
+                        <option value="여자">여자</option>
+                    </select>
+                </div>
+                <div class="col border-start"style="float:none; margin 0 auto;">
+                    <select class="form-select" name="i_category2" id="i_category2">
+                        <option selected>상품 카테고리</option>
+                        <option value="상의">상의</option>
+                        <option value="하의">하의</option>
+                        <option value="아우터">아우터</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="i_img" class="form-label">사진 선택</label>
+            <input class="form-control" type="file" name="i_img" id="i_img">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% include "footer.html" %}
+{% endblock content%}

@@ -1,0 +1,74 @@
+{% extends "body.html" %}
+    {% block content %}
+
+
+<div id="content" class="container mt-5">
+<h2 class="text-center"> Orders List </h2>
+    <div class="row">
+        <form method="post" action="">
+            {% csrf_token %}
+            <table class="table table-striped" style="text-align: center;" >
+            <thead>
+            <tr><th colspan="8"> {{request.session.user_id}} 님 반갑습니다.</th></tr>
+            <tr>
+        <th>번호</th>
+        <th>주문 번호</th>
+        <th>상품이름</th>
+        <th>가격</th>
+        <th>총 금액</th>
+        <th>상품 갯수</th>
+
+                </tr>
+            </thead>
+                <tbody>
+                {% comment %}
+                tuple => e.index
+                [(11,'', '', '')]
+    <%-- for start --%>
+     <%-- 일반회원 로그인 시 구매목록 컬럼
+	      	 주문번호, 상품명, 수량, 총 금액, 주문상태
+    아래 내용 추가 --%>
+              {% endcomment %}
+  {% for e in result %}
+                <tr>
+        <td>{{e.0}}</td>
+        <td>{{e.1}}</td>
+        <td>{{e.2}}</td>
+        <td>{{e.3}}</td>
+        <td>{{e.4}}</td>
+        <td>{{e.5}}</td>
+
+        <td>
+            <input type="button" value="리뷰 작성"
+                   onclick="location.href='${ mycontext}/web/review/reviewForm?ord_no=${e.ord_no}&i_no=${e.ivo.i_no }'"  ></td>
+
+      </tr>
+                </tr>
+  {% endfor %}
+
+                </tbody>
+
+<tfoot>
+<tr>
+<th colspan="8" class="text-center cth" >
+  {% include "basket/basket_page.html" %}
+</th>
+</tr>
+<tr>
+<td colspan="8" style="text-align: right;">
+  <form action="memberList" method="get">
+	<input class="form-control me-2" type="text" id="search" name="search" placeholder="Search.." style="width: 300px; float: left;">
+	<button class="btn btn-outline-secondary" type="submit" id="searchBtn">Search</button>
+  </form>
+</td>
+</tr>
+
+</tfoot>
+
+
+      </table>
+        </form>
+
+    </div></div>
+
+    {% endblock content %}

@@ -1,0 +1,26 @@
+{% include 'header2.html' %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+{% include 'myPageSidebar.html' %}
+	</div>
+    <div class="col-lg-3" style="margin:80px">
+
+	</div>
+</div>
+</div>
+<script>
+	$(function () {
+		<%-- mypage - 정보 수정 버튼 --%>
+		$('#btn0').click(function() {
+			$('#updateform').submit();
+		});
+		<%-- mypage - 구매목록 버튼 --%>
+		$('#orderlist').click(function() {
+			location = "orders/ordersList";
+		});
+	});
+
+</script>
+{% endblock content%}

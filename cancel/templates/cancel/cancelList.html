@@ -1,0 +1,61 @@
+{% extends "body.html" %}
+<!-- content 입력 -->
+{% block content %}
+<div id="content" class="container mt-5">
+<h2 class="text-center">Cancel List </h2>
+<div><button class="btn btn-outline-primary me-2" type="button"
+        onclick="location='/cancel/cancelChart'">CancelChart</button>
+</div>
+<div class="row" style="text-align:center ">
+<form method="post" action="" >
+    {% csrf_token %}
+<p class="list-unstyled">
+</p>
+  <table class="table table-bordered" style="text-align: center;">
+    <thead>
+      <tr>
+      <!-- 관리자 - 취소 리스트 - 7 컬럼 -->
+        <th>NO</th>
+        <th>주문취소 번호</th>
+        <th>상품명</th>
+        <th>주문수량</th>
+        <th>주문취소 총액</th>
+        <th>취소 사유</th>
+        <th>취소 날짜</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- for start -->
+        {% for e in result %}
+        <tr>
+          	<td>{{e.0 }}</td>
+	        <td>{{e.1 }}</td>
+	        <td>{{e.2 }}</td>
+	        <td>{{e.3 }}</td>
+	        <td>{{e.4 }}</td>
+	        <td>{{e.5 }}</td>
+	        <td>{{e.6 }}</td>
+        </tr>
+        {% endfor %}
+        <!-- for end -->
+    </tbody>
+    <tfoot>
+    <tr>
+    <th colspan="7" class="text-center cth" >
+        {% include "page.html" %}
+    </th>
+    </tr>
+    </tfoot>
+</table>
+</form>
+
+</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+
+    });
+</script>
+{% endblock content %}

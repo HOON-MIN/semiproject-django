@@ -1,0 +1,125 @@
+{% include 'header2.html' %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+{% include 'memberChartSidebar.html' %}
+	</div>
+    <div class="col-lg-5" style="margin:80px">
+		<div>
+			<button value="a" name="gender" id="gender">성별 차트</button>
+			<button value="b" name="age" id="age">연령별 차트</button>
+			<button value="c" name="loc" id="loc">지역별 차트</button>
+		</div>
+		<div id="chart"></div>
+		<div id="chart2"></div>
+	</div>
+	</div>
+</div>
+<script>
+	var chartData = [];
+    var chartData2 = [];
+    var rval;
+    var rval2;
+$(function(){
+    $('button').click(function() {
+    	rval = $(this).val();
+    	console.log(rval);
+    	$.ajax({
+        	type: "GET",
+        	url: "/member/memberChartAjax?rval="+rval,
+        	success: function(result) {
+        		chartData.length = 0;
+        		$.each(result, function(key, value){
+                         chartData.push([key,value]);
+                 });
+        		if(rval == 'a') {
+        			viewchart1(chartData);
+        			$('#chart2').empty();
+        		} else if(rval == 'b') {
+        			viewchart2(chartData);
+        			$('#chart2').empty();
+        		} else {
+        			viewchart3(chartData);
+        			$('#chart2').empty();
+        		}
+        	},
+    });
+	});
+ });
+
+	function viewchart1(chartData){
+	var chart1 = c3.generate({
+        bindto: '#chart',
+        data: {
+           // iris data from R
+           columns: chartData,
+           type : 'pie',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+           onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+           onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            }
+        });
+        }
+
+    function viewchart2(chartData){
+	var chart2 = c3.generate({
+        bindto: '#chart',
+        data: {
+           // iris data from R
+           columns: chartData,
+           type : 'donut',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+           onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+           onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            }
+        });
+        }
+
+    function viewchart3(chartData){
+	var chart3 = c3.generate({
+        bindto: '#chart',
+        data: {
+           // iris data from R
+           columns: chartData,
+           type : 'pie',
+            onclick: function (d, i) {
+            	rval2 = d.id;
+            	console.log(rval2);
+            	$.ajax({
+        			type: "GET",
+        			url: "/member/memberChartAjax?rval="+rval2,
+        			success: function(result) {
+        				chartData2.length = 0;
+        				$.each(result, function(key, value){
+              		           chartData2.push([key,value]);
+               		  	});
+        				viewchart4(chartData2);
+        			},
+    			});
+            },
+           onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+           onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            }
+        });
+        }
+
+  function viewchart4(chartData2){
+	 var chart4 = c3.generate({
+        bindto: '#chart2',
+        data: {
+           // iris data from R
+           columns: chartData2,
+           type : 'donut',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+           onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+           onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            },
+             donut: {
+        		title: rval2
+    			}
+        });
+        }
+
+</script>
+{% endblock content%}

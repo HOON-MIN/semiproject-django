@@ -1,0 +1,66 @@
+{% extends "body.html" %}
+    {% block content %}
+<div id="content" class="container mt-5">
+<h2 class="text-center"> OrdersForm Demo </h2>
+    <div class="row">
+	<ul class="list-unstyled">
+		<li class="border-top my-3"></li>
+	</ul>
+	</div>
+	<form method="post" action="orderIn">
+	<div>
+		<!--select i.i_no, i.i_name, i.i_category1, i.i_category2, i.i_price from item i, stock s
+where i.i_no = s.s_no and i.i_no = 2;-->
+		<div class="form-group">
+			<label for="i_name">상품명</label>
+			<input type="text" class="form-control" id="i_name" name="i_name"
+				value="{{detail.1 }}" readonly="readonly">
+		</div>
+
+		<div class="form-group">
+			<label for="i_category1">분류</label>
+			<input type="text" class="form-control" id="i_category1" name="i_category1"
+				value="{{detail.2}}" readonly="readonly">
+		</div>
+		<div class="form-group">
+			<label for="i_category2">품목</label>
+			<input type="text" class="form-control" id="i_category2" name="i_category2"
+				value="{{detail.3}}" readonly="readonly">
+		</div>
+				<div class="form-group">
+			<label for="i_price">금액</label>
+			<input type="text" class="form-control" id="i_price" name="i_price" readonly="readonly"
+				value="{{detail.4}}">
+		</div>
+		<div class="form-group">
+			<label for="number">수량</label>
+			<input type="text" class="form-control" id="number" name="number"
+				value="{{ord_count }}" readonly="readonly"></div>
+		</div>
+
+								<!--사용자에게 입력 받는 구간  -->
+		<input type="hidden" id="i_no" name="i_no" value="{{detail.0 }}">
+		<div class="form-group">
+			<label for="ord_name">주문자 이름</label> <input type="text"
+				class="form-control" id="ord_name" name="ord_name">
+		</div><div class="form-group">
+			<label for="ord_address">주소</label>
+		<input type="text" class="form-control" id="ord_address" name="ord_address">
+		</div>
+									<!-- 최종 구매 금액 -->
+		<div id="target2" style="text-align: right;"><h2> total()</h2></div>
+									<!-- 버튼 -->
+		<div class="form-group" style="text-align: right; margin-top: 10px;">
+			<button type="submit" class="btn btn-primary">구매</button>
+			<button type="button" class="btn btn-primary"
+			onclick="location.href='${mycontext}/item/itemDetail?s_no={{detail.0}}'">목록</button>
+		</div>
+
+		</form>
+	</div>
+</div>
+    {% endblock content %}
+<script>
+
+
+</script>

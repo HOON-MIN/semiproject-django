@@ -1,0 +1,91 @@
+{% comment %}
+has_previous 이전 페이지 유무
+previous_page_number 이전 페이지 번호
+paginator.page_range 페이지 리스트 [1,2,3]
+has_next 다음 페이지 유무
+next_page_number 다음 페이지 번호
+page_obj 페이지 처리된 객체
+num_pages :?
+{% endcomment %}
+
+<!--<div class="container mt-5">-->
+<!--    <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination justify-content-center">-->
+<!--            {% if result.has_previous %}-->
+<!--            <li class="page-item">-->
+<!--                <a class="page-link" href="?page={{page_number}}&searchValue={{searchValue}}" aria-disabled="true">-->
+<!--                    <span aria-hidden="true">&laquo;</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="page-item disabled">-->
+<!--                <a href="#" class="page-link">-->
+<!--                    <span aria-hidden="true">&laquo;</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+
+
+<!--            {% for page_number in result.paginator.page_range %}-->
+<!--            &lt;!&ndash; 현재 페이지 &ndash;&gt;-->
+<!--            {% if page_number == result.number %}-->
+<!--            <li class="page-item disabled">-->
+<!--                <a href="#" class="page-link">{{page_number}}</a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="page-item">-->
+<!--                <a href="?page={{page_number}}&searchValue={{searchValue}}" class="page-link">-->
+<!--                    {{page_number}}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+<!--            {% endfor %}-->
+
+<!--            {% if result.has_next %}-->
+<!--            <li class="page-item">-->
+<!--                <a class="page-link" href="?page={{result.next_page_number}}&searchValue={{searchValue}}" tabindex="1" aria-disabled="true">-->
+<!--                    <span aria-hidden="true">&raquo;</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="page-item disabled">-->
+<!--                <a href="#" class="page-link">-->
+<!--                    <span aria-hidden="true">&raquo;</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+
+<div class="container mt-5">
+{% if result.has_other_pages %}
+    <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-center">
+            {% if result.has_previous %}
+                <li><a class="page-link text-primary d-inline-block" href="?page={{ result.previous_page_number }}&searchValue={{searchValue}}">&laquo</a></li>
+            {% else %}
+                <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">&laquo</div></li>
+            {% endif %}
+
+            {% if result.has_previous %}
+                {% if result.previous_page_number != 1 %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page=1&searchValue={{searchValue}}">1</a></li>
+                    <li>…</li>
+                {% endif %}
+                <li><a class="page-link text-primary d-inline-block" href="?page={{ result.previous_page_number }}&searchValue={{searchValue}}">{{ result.previous_page_number }}</a></li>
+            {% endif %}
+            <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ result.number }}</div></li>
+            {% if result.has_next %}
+                <li><a class="page-link text-primary d-inline-block" href="?page={{ result.next_page_number }}&searchValue={{searchValue}}">{{ result.next_page_number }}</a></li>
+                {% if result.next_page_number != result.paginator.num_pages %}
+                    <li>…</li>
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ result.paginator.num_pages }}&searchValue={{searchValue}}">{{ result.paginator.num_pages }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% if result.has_next %}
+                <li><a class="page-link text-primary d-inline-block" href="?page={{ result.next_page_number }}&searchValue={{searchValue}}">&raquo</a></li>
+            {% else %}
+                <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">&raquo</div></li>
+            {% endif %}
+        </ul>
+    </nav>
+  {% endif %}
+</div>

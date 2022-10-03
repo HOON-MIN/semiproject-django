@@ -1,0 +1,60 @@
+{% comment %}
+has_previous 이전 페이지 유무
+previous_page_number 이전 페이지 번호
+paginator.page_range 페이지 리스트 [1,2,3]
+has_next 다음 페이지 유무
+next_page_number 다음 페이지 번호
+page_obj 페이지 처리된 객체
+num_pages :?
+{% endcomment %}
+<div class="row">
+  <div class="col-12">
+    <nav class="container mt-3">
+      <!--justify-content-end, justify-content-center-->
+      <ul class="pagination justify-content-center">
+        {% comment %}
+          이전 페이지 영역 시작
+        {% endcomment %}
+        {% if result.has_previous %}
+        {% comment %}
+          ? 앞에 비워두면 기존의 url뒤에 붙는다.
+        {% endcomment %}
+        <li class="page-item"><a href="?page={{result.previous_page_number}}&searchValue={{searchValue}}" class="page-link">이전</a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#" class="page-link">이전</a></li>
+        {% endif %}
+
+      {% comment %}
+      이전 페이지 영역 끝
+      {% endcomment %}
+      <!-- 페이지 반복 시작
+       page_number : page_range 에서 출력한 페이지 번호
+       -->
+      {% for page_number in result.paginator.page_range %}
+        <!--현재 페이지  -->
+          {% if page_number == result.number %}
+        <li class="page-item disabled"><a href="#" class="page-link">{{page_number}}</a> </li>
+          {% else %}
+        <li class="page-item"><a href="?page={{page_number}}&searchValue={{searchValue}}" class="page-link">{{page_number}}</a></li>
+           {% endif %}
+          {% endfor %}
+      <!-- 페이지 반복 끝 -->
+      <!-- next Page -->
+        {% comment %}
+      다음  페이지 영역 시작
+      {% endcomment %}
+        {% if result.has_next %}
+      <li class="page-item">
+        <a href="?page={{result.next_page_number}}&searchValue={{searchValue}}" class="page-link"> 다음 </a>
+      </li>
+       {% else %}
+       <li class="page-item disabled"><a href="#" class="page-link">다음</a></li>
+       {% endif %}
+      {% comment %}
+      다음  페이지 영역 끝
+      {% endcomment %}
+        </ul>
+    </nav>
+  </div>
+</div>
+

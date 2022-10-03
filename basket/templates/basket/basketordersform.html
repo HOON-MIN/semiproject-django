@@ -1,0 +1,71 @@
+{% extends "body.html" %}
+    {% block content %}
+<div id="content" class="container mt-5">
+<h2 class="text-center"> BasketOrderForm Demo </h2>
+    <div class="row">
+	<ul class="list-unstyled">
+		<li class="border-top my-3"></li>
+	</ul>
+	</div>
+
+   <form method="post" id="form2" name="form2" action="">
+    {% csrf_token %}
+
+   <div>
+      <div class="form-group">
+         <label>상품명</label> <input type="text"
+            class="form-control" id="i_name" name="i_name"
+            value="{{baorder.1}}" readonly="readonly">
+      </div>
+      <div class="form-group">
+         <label>단가</label> <input type="text"
+            class="form-control" id="i_price" name="i_price"
+            value="{{baorder.2 }}" readonly="readonly">
+      </div>
+      <div class="form-group">
+         <label>총금액</label> <input type="text"
+            class="form-control" id="totalPrice" name="totalPrice" readonly="readonly"
+            value="{{baorder.3}}">
+      </div>
+
+      <div class="form-group">
+         <label>수량</label> <input type="text"
+            class="form-control" id="ord_count" name="ord_count"
+            value="{{baorder.4 }}" readonly="readonly">
+      </div>
+
+
+                        <!--사용자에게 입력 받는 구간  -->
+      <div>
+      <input type="hidden" id="i_no" name="i_no" value="{{baorder.0 }}">
+         <input type="hidden" id="b_num" name="b_num" value="{{baorder.5}}">
+      <div class="form-group">
+         <label >주문자 이름</label> <input type="text"
+            class="form-control" id="ord_name" name="ord_name" required="required">
+      </div>
+         <div class="form-group">
+         <label>주소</label> <input type="text"
+            class="form-control" id="ord_address" name="ord_address" required="required">
+      </div>
+                           <!-- 버튼 -->
+      <div class="form-group" style="text-align: right; margin-top: 10px;">
+         <button type="submit" class="btn btn-primary" id="inbasketbtn" name="inbasketbtn">구매</button>
+         <button type="button" class="btn btn-primary"
+         onclick="location.href='/basket/basketList'">목록</button>
+      </div>
+</div>
+   </div>
+      </form>
+</div>
+
+<script>
+$(function() {
+		$('#inbasketbtn').click(function() {
+			$('#form2').attr('action',"baOrderInsert");
+			$('#form2').submit();
+		});
+});
+
+</script>
+{% endblock content %}
+

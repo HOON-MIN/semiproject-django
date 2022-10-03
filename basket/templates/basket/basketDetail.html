@@ -1,0 +1,69 @@
+{% extends "body.html" %}
+    {% block content %}
+<div id="content" class="container mt-5">
+<h2>장바구니 상세페이지</h2>
+    <form method="post" id="form1" name="form1" action="">
+        {% csrf_token %}
+<input type="hidden" id="bnum" name="bnum" value="{{basketdetail.0}}">
+<input type="hidden" id="i_no" name="i_no" value="{basketdetail.1}}">
+<input type="hidden" id="i_category1" name="i_category1" value="{{basketdetail.4}}">
+<input type="hidden" id="i_category2" name="i_category2" value="{{basketdetail.5}}">
+			<div class="form-group">
+				<label for="b_num">장바구니 번호</label>
+				<input type="text" class="form-control" id="b_num" name="b_num"
+					value="{{basketdetail.0}}" readonly="readonly">
+			</div>
+		<div class="form-group">
+				<label for="b_num">상품 번호</label>
+				<input type="text" class="form-control" id="i_num" name="i_num"
+					value="{{basketdetail.1}}" readonly="readonly">
+			</div>
+			<div class="form-group">
+				<label for="i_name">상품 이름</label> <input type="text"
+					class="form-control" id="i_name" name="i_name" readonly="readonly"
+					value="{{basketdetail.2}}">
+			</div>
+			<div class="form-group">
+				<label for="i_price">단가</label> <input type="text"
+					class="form-control" id="i_price" name="i_price"
+					value="{{basketdetail.3}}" readonly="readonly">
+			</div>
+			<div class="form-group">
+				<label for="totalPrice">총 금액</label> <input type="text"
+					class="form-control" id="totalPrice" name="totalPrice"
+					value="{{basketdetail.6}}" readonly="readonly">
+			</div>
+			<div class="form-group">
+				<label for="b_stock">상품 갯수</label> <input type="text"
+					class="form-control" id="b_stock" name="b_stock"
+					value="{{basketdetail.7}}">
+			</div>
+		<div>
+
+			<input type="submit" value="주문페이지로" name="selectbtn" id="selectbtn" class="btn btn-outline-secondary">
+			<input type="submit" value="주문수량 수정" name="upbasketbtn" id="upbasketbtn" class="btn btn-outline-secondary">
+			<input type="submit" value="삭제" name="delbasketbtn" id="delbasketbtn" class="btn btn-outline-secondary">
+		</div>
+       </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
+<script>
+	$(function() {
+		$('#selectbtn').click(function() {
+			$('#form1').attr('action',"basketordersform");
+			$('#form1').submit();
+			location = "basketordersform?b_num={{basketdetail.0}}";
+		});
+		$('#upbasketbtn').click(function() {
+			$('#form1').attr('action',"basketUpdate");
+			$('#form1').submit();
+		});
+		$('#delbasketbtn').click(function() {
+			$('#form1').attr('action','basketDelete');
+			$('#form1').submit();
+		});
+		});
+</script>
+
+    {% endblock content %}

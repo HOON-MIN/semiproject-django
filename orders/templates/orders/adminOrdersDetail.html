@@ -1,0 +1,139 @@
+{% extends "body.html" %}
+<!-- content 입력 -->
+{% block content %}
+<style>
+	.option { width:50px; height:20px; }
+</style>
+<div id="content" class="container mt-5" style="width:65%">
+<div class="row" style="text-align:center">
+	<header style="margin-bottom: 20px">
+		<h1>adminOrders Detail</h1>
+	</header>
+	<div class="container">
+		<!-- updateForm 들어갈 자리 -->
+<!--			<form method="post" action="adminOrdersUpdate" id="update" name="update">-->
+			<form method="post" id="form1" name="form1">
+				{% csrf_token %}
+			<input type="hidden" id="ord_no" name="ord_no" value="{{ordDetailv.0 }}">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th colspan="2" style="text-align: center;">주문자명</th>
+					<th colspan="2" style="text-align: center;">회원명</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td colspan="2" style="text-align: center;">
+					<input type="text" name="ord_name" id="ord_name" value="{{ordDetailv.1}}"/></td>
+				<td colspan="2" style="text-align: center;">{{ordDetailv.2}}</td>
+				</tr>
+				</tbody>
+				<thead>
+				<tr>
+					<th>상품명</th>
+					<th>상품가격</th>
+					<th>주문수량</th>
+					<th>총 금액</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td style="text-align: center;">{{ordDetailv.3}}</td>
+				<td style="text-align: center;">{{ordDetailv.4}}</td>
+				<td style="text-align: center;">{{ordDetailv.5}}</td>
+				<td style="text-align: center;">{{ordDetailv.6}}</td>
+				</tr>
+				</tbody>
+				<thead>
+				<tr><th colspan="4" >상품사진</th></tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td colspan="4">
+				<!--{{ordDetailv.7}}-->
+					{% if ordDetailv.7 != '-' %}
+					  <img src="/static/images/{{ordDetailv.7}}" style="width:400px">
+					{% endif %}
+				</tr>
+				</tbody>
+				<thead>
+				<tr>
+					<th colspan="2">배송주소</th>
+					<th>배송상태</th>
+					<th>주문 취소 관리 </th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td colspan="2">
+					<input type="text" name="ord_address" id="ord_address" value="{{ordDetailv.8}}"/></td>
+				<td>
+				<select class="btn btn-outline-secondary" name="i_status" id="i_status" >
+					<option class="option" value="{{ordDetailv.12}}">{{ordDetailv.12}}</option>
+					<option class="option" value="발송완료">발송완료</option>
+					<option class="option" value="배송완료">배송완료</option>
+					<option class="option" value="주문취소">주문취소</option>
+				</select>
+				</td>
+				<td>
+                    <select class="btn btn-outline-secondary " name="creason" id="creason">
+                      <option value="-">--취소사유 선택--</option>
+                      <option value="단순변심">단순변심</option>
+                      <option value="옵션변경">옵션변경</option>
+                      <option value="배송지연">배송지연</option>
+                      <option value="상품품절">상품품절</option>
+                    </select>
+                	<button id="ordCanBtn" type="button" class="btn btn-outline-secondary">주문 취소</button>
+				</td>
+				</tr>
+				</tbody>
+				<thead>
+				<tr>
+					<th colspan="2">주문날짜</th>
+					<th>배송완료날짜</th>
+					<th>주문취소날짜</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td colspan="2">{{ordDetailv.9}}</td>
+					<td>{{ordDetailv.10}}</td>
+					<td>{{ordDetailv.11}}</td>
+				</tr>
+				</tbody>
+			</table>
+			<div class="form-group" style="text-align: right; margin-top: 10px;" >
+				<input type="button" value="주문정보수정" id="upordersbtn" class="btn btn-outline-secondary"/>
+				<input type="button" value="삭제" id="delordersbtn" class="btn btn-outline-secondary"/>
+			</div>
+			</form>
+	</div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(function() {
+		$('#upordersbtn').click(function() {
+			$('#form1').attr('action','adminOrdersUpdate');
+			$('#form1').submit();
+		});
+		$('#delordersbtn').click(function() {
+			if( '{{ordDetailv.12}}' == '주문취소'){
+				location = "adminOrdersDelete?ord_no={{ordDetailv.0}}";
+				alert("해당 주문이 삭제되었습니다.");
+			}else{
+				alert("주문상태가 '주문취소'인 경우에만 삭제가 가능합니다.");
+			}
+		});
+	<!-- 주문 취소 버튼 -->
+		$('#ordCanBtn').click(function() {
+			$('#form1').attr('action','adminCanInsert');
+			$('#form1').submit();
+<!--			$('#creason option:selected').val();-->
+<!--			location = "adminCanInsert";-->
+		});
+	});
+</script>
+
+{% endblock content %}

@@ -1,0 +1,95 @@
+{% include 'header2.html' %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+{% include 'memberChartSidebar.html' %}
+		</div>
+    <div class="col-lg-3" style="margin:80px">
+		<div>
+			<button value="a" name="env" id="env">접속 기기</button>
+			<button value="b" name="browser" id="browser">접속 브라우저</button>
+			<button value="c" name="ratio" id="ratio">재방문 비율</button>
+		</div><br>
+		<div id="chart"></div>
+	</div>
+</div>
+</div>
+<script>
+$(function(){
+	var Chart = [];
+	var rval;
+
+    $('button').click(function() {
+    	rval = $(this).val();
+    	console.log(rval);
+    	$.ajax({
+    		type: "GET",
+    		url:"/member/memberLogChartAjax?rval="+rval,
+    		success: function(result){
+    			Chart.length = 0;
+    			$.each(result, function(key, value){
+    				Chart.push([key, value]);
+    			});
+    		if(rval == 'a'){
+				viewEnvChart(Chart);
+    		}else if(rval == 'b'){
+    			viewBrowserChart(Chart);
+    		}else if(rval == 'c'){
+    			viewRatioChart(Chart);
+    		}
+    		}
+    	});
+    });
+});
+
+function viewEnvChart(Chart){
+    var chart = c3.generate({
+      bindto: '#chart',
+      data: {
+          columns: Chart,
+          type : 'pie',
+          onclick: function (d, i) { console.log("onclick", d, i); },
+          onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+          onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+      }
+    });
+}
+
+function viewBrowserChart(Chart){
+    var chart = c3.generate({
+      bindto: '#chart',
+      data: {
+          columns: Chart,
+          type : 'pie',
+          onclick: function (d, i) { console.log("onclick", d, i); },
+          onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+          onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+      }
+    });
+}
+
+function viewRatioChart(Chart){
+    var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: Chart,
+        type : 'donut',
+        onclick: function (d, i) { console.log("onclick", d, i); },
+        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+        onmouseout: function (d, i) { console.log("onmouseout", d, i); },
+        labels: true,
+   		 names: {
+     		 0: '10번 이상',
+      		1: '5번~10번',
+      		2: '5번 이하'
+   		 }
+    },
+    donut: {
+        title: "재방문 비율 그래프"
+    }
+
+});
+}
+</script>
+{% endblock content%}

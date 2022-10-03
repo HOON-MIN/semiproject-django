@@ -1,0 +1,57 @@
+{% include 'header.html' %}
+
+{% block content %}
+<style>
+h4{
+	padding: 40px 0;
+	text-align: center;
+}
+.container {
+	margin-top: 80px;
+	padding-bottom : 40px;
+	padding-left: 64px;
+	padding-right : 64px;
+	width: 640px;
+	background-color: white;
+}
+.links{
+	display:flex;
+	justify-content: center;
+}
+
+.button{
+	text-align: center;
+}
+
+.links a{
+	text-align : center;
+	text-decoration: none;
+	color : #232323;
+}
+
+.links span{
+	padding : 0 8px;
+}
+</style>
+
+<div class="container">
+	<h4>아이디 찾기</h4>
+	<form action="findId" method="post">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label class="form-label" for="mem_name">이름</label>
+			<input class="form-control" type="text" name="mem_name" id="mem_name" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="mem_email">이메일</label>
+			<input class="form-control" type="text" name="mem_email" id="mem_email" />
+		</div>
+		{% if result.id != null %}
+			<label style="color:red">회원님의 아이디 => {{result.id}}</label>
+		{% endif %}
+		<div class="mb-3 button">
+		<button class="btn btn-outline-dark" id="btn1"type="submit">찾기</button>
+		</div>
+	</form>
+</div>
+{% endblock content %}

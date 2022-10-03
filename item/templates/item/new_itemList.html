@@ -1,0 +1,45 @@
+{% extends "body.html" %}
+{% block content %}
+<style>
+
+  .text-muted{
+    font-weight : bold;
+    color : #000000 !important;
+  }
+  .sale{
+    font-weight : normal;
+    color : #ababab;
+    text-decoration : line-through ;
+  }
+  a {
+    text-decoration : none;
+    color : #232323;
+  }
+  a:hover {
+    color : #565656;
+  }
+  .blockquote{
+    margin-top : 80px;
+  }
+</style>
+<div class="container">
+    <p class="h2 p-3 m-3 text-center"> 새로운 상품 리스트</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4 itemlist">
+        {% for e in result %}
+        <div class="col">
+            <div class="card">
+                <a href="detail?i_no={{e.0}}"><img src="{{e.5}}" class="card-img-top"></a>
+                <div class="card-body">
+                    <a href="detail?i_no={{e.0}}"><h6 class="card-title">{{e.1}}</h6></a>
+                    <p class="card-text">{{e.4}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted price"><span class="sale">{{e.3}}원</span> {{e.2}}원</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include "itempage.html" %}
+{% endblock content%}

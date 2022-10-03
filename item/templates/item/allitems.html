@@ -1,0 +1,57 @@
+{% extends "body.html" %}
+{% block content %}
+<style>
+  .itemlist{
+    margin : 0 80px;
+  }
+  .text-muted{
+    font-weight : bold;
+    color : #000000 !important;
+  }
+  .sale{
+    font-weight : normal;
+    color : #ababab;
+    text-decoration : line-through ;
+  }
+  a {
+    text-decoration : none;
+    color : #232323;
+  }
+  a:hover {
+    color : #565656;
+  }
+  .blockquote{
+    margin-top : 80px;
+  }
+</style>
+<blockquote class="blockquote text-center">
+  <p>메인 페이지 상품</p>
+</blockquote>
+</figure>
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-md-3 g-4 itemlist">
+    {% for e in all %}
+    <div class="col">
+      <div class="card">
+        <a href="#"><img src="//image.msscdn.net/images/goods_img/20200828/1568057/1568057_4_320.jpg" class="card-img-top"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{e.1}}</h5>
+          <a href="#"><p class="card-text">이미지 파일 임시 자리 : {{e.5}} </p></a>
+        </div>
+         <div class="card-footer">
+        <small class="text-muted price"><span class="sale">{{e.3}}원</span>  {{e.2}}원</small>
+       </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<p class="h2"> 상품 전체 리스트</p>
+{% for e in all %}
+<ul>
+    <li>{{e.4}}</li>
+    <li>{{e.1}}</li>
+    <li>{{e.2}}</li>
+</ul>
+{% endfor %}
+{% endblock content%}

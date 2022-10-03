@@ -1,0 +1,126 @@
+<style>
+    .categorynav{
+        height : 80px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/image/logo1.png" alt="" width="100%" height="80" class="d-inline-block align-text-top">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+                {% if 'user_name' in request.session %}
+                    {% if request.session.user_id == 'admin' %}
+                <button class="btn btn-light me-2" disabled>{{request.session.user_name}} 님</button>
+                <li class="nav-item"><a href="/member/memberList" class="nav-link active">MemberList</a></li>
+                          <li class="nav-item">
+                        </li>
+                 <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/memberChart'">MemberChart</button></li>
+
+            <!-- adminOrdersList test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/adminOrdersList">adminOrdersList</a>
+                </li>
+            <!-- adminOrdersList test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/cancel/cancelList">CancelList</a>
+                </li>
+            <!-- cancelChart test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/cancel/cancelChart">CancelChart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/item/write">상품 등록페이지</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/item/chart">브랜드 별 클릭 순 차트</a>
+                </li>
+                     <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/logout'">Logout</button></li>
+                    {% else %}
+                     <button class="btn btn-light me-2" disabled>{{request.session.user_name}} 님</button>
+                <li class="nav-item"><a href="/member/myPageMain" class="nav-link active">My Page</a></li>
+                 <!-- 일반회원 주문 - ordersForm test용----- -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/ordersForm">ordersForm</a>
+                </li>
+                 <li class="nav-item"><a href="/orders/orderslist" class="nav-link active">ordersList</a></li>
+                <li class="nav-item"><a href="/basket/blist" class="nav-link active">basketList</a></li>
+                          <li class="nav-item">
+                        </li>
+                     <li class="nav-item"><button class="btn btn-outline-warning me-2" type="button"
+                                 onclick="location='/member/logout'">Logout</button></li>
+                    {% endif %}
+                {% else %}
+                     <li class="nav-item"><a href="/member/joinForm" class="nav-link active">Join Us</a></li>
+                     <li class="nav-item"><button class="btn btn-outline-success me-2" type="button"
+                                 onclick="location='/member/loginForm'">Login</button></li>
+                 {% endif%}
+            </ul>
+
+            <form class="d-flex" action="/item/searchResult">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<ul class="nav justify-content-center align-items-center categorynav ">
+    <li class="nav-item">
+        <a class="nav-link" href="#">BEST</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/item/new">NEW</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">남자</a>
+        <ul class="dropdown-menu">
+           <li><a class="dropdown-item" href="#">상의</a></li>
+            <li><a class="dropdown-item" href="#">하의</a></li>
+            <li><a class="dropdown-item" href="#">아우터</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">여자</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">상의</a></li>
+            <li><a class="dropdown-item" href="#">하의</a></li>
+            <li><a class="dropdown-item" href="#">아우터</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-bold" href="#">SALE!!</a>
+    </li>
+</ul>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+ <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="https://file.cafe24cos.com/banner-admin-live/upload/goddess789/53a06893-c2c9-4a8e-c8c3-3ad10957d6bc.jpeg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+        <img src="https://file.cafe24cos.com/banner-admin-live/upload/goddess789/f63024c1-08d9-421d-a2c4-11050cf02cd3.jpeg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="https://file.cafe24cos.com/banner-admin-live/upload/goddess789/78971435-1f8e-4734-acd8-be73e5676a24.jpeg" class="d-block w-100">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

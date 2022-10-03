@@ -1,0 +1,60 @@
+{% extends "body.html" %}
+{% block content %}
+<style>
+    a{
+        text-decoration:none;
+    }
+</style>
+
+<detail class="mt-8">
+    <p class="h2 text-center m-5"> 상품 상세 페이지</p>
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-5">
+                <img src="{{itemlist.6}}" class="d-block w-100">
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{itemlist.1}}</h5>
+                        <p class="card-text">
+                            {{itemlist.5}}
+                        </p>
+                        <h3 class="card-title pt-3 pb-3">{{itemlist.2}} 원</h3>
+                        <p class="card-text">
+                            <span class="badge bg-dark">{{itemlist.3}}</span>
+                            <span class="badge bg-dark">{{itemlist.4}}</span>
+                        </p>
+                        <p class="card-text border-top">
+                        <div class="row">
+                            <div class="col-auto">
+                                <label class="col-form-label">구매수량</label>
+                            </div>
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <a href="" ><span class="input-group-text">-</span></a>
+                                    <input type="text" class="form-control" placeholder="1" style="width : 40px;">
+                                    <a href=""><span class="input-group-text">+</span></a>
+                                </div>
+                            </div>
+                        <div class="card-title pt-4 pb-0">
+                                    <h4>총 구매 금액 : {{itemlist.2}} 원</h4>
+                                </div>
+                        </div>
+                        </p>
+                        <div class="d-flex justify-content-bewteen align-items-center pt-3 border-top">
+                            <div class="col-6 d-grid">
+                                <button type="button" class="btn btn-lg btn-dark">장바구니 담기</button>
+                            </div>
+                            <div class="col-6 d-grid">
+                                <button type="button" class="btn btn-lg btn-outline-secondary">구매</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</detail>
+
+{% endblock content%}지
